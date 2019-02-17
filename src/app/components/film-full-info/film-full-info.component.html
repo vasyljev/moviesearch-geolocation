@@ -1,0 +1,16 @@
+<section class="movie-full-info">
+  <img [src]="movie.Poster == 'N/A' ? 'https://cdn.browshot.com/static/images/not-found.png' : movie.Poster" alt="Poster">
+  <div class="info-block">
+      <h2>{{movieInfo?.Title}}</h2>
+      <p><b>Yaer:</b> {{movieInfo?.Year}}</p>
+      <p><b>Country:</b> {{movieInfo?.Country}}</p>
+      <p><b>Director:</b> {{movieInfo?.Director}}</p>
+      <p><b>Actors:</b> {{movieInfo?.Actors}}</p>
+      <p><b>Genre:</b> {{movieInfo?.Genre}}</p>
+      <button (click)="addOrRemoveFavorite(movieInfo.Title)">{{favorite ? 'Remove from favorite' : 'Add to favorite'}}</button>
+      
+  </div>
+  
+</section>
+<app-recommended [year]="movieInfo?.Year" [title]="movieInfo?.Title" [genre]="movieInfo?.Genre"></app-recommended>
+<button (click)="goToMovieSearch()">Back</button>

@@ -1,0 +1,11 @@
+<h2>Your favorites movies</h2>
+<section id="movie-favorite">  
+  <div *ngFor="let movie of list" class="movie-mini-description">
+    <button class="favoties-button" (click)="removeFromFavorite(movie.Title)">Remove from favorites</button>
+    <a [routerLink]="'/film/full/' + movie.Title" (click)="setMovie(movie)">
+      <img [src]="movie.Poster == 'N/A' ? 'https://cdn.browshot.com/static/images/not-found.png' : movie.Poster" alt="Poster">
+      <h3>{{movie.Title}}</h3>
+      <p>Year: {{movie.Year}}</p>
+    </a>
+  </div>  
+</section>

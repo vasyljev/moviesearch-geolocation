@@ -1,1 +1,165 @@
-/* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+button {
+    width: 100px;
+    height: 30px;
+    background-color: darkcyan;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    margin: 10px;
+    transition: box-shadow .3s; 
+    outline: none;
+}
+
+button:hover, input:hover {
+    box-shadow: 0 0 10px blue;
+    transition: box-shadow .3s;
+}
+
+input {
+    border-radius: 10px;
+    width: 20vw;
+    height: 30px;
+    border: 1px solid rgba(0,0,0,0.6);
+    outline: none;
+    padding: 5px;
+    margin: 20px 0;
+}
+
+.main {
+    padding: 10px;
+}
+
+#movie-search-result {
+    // width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    img {
+        width: 20vw;
+    }
+   
+}
+
+.movie-mini-description {
+    width: 20vw;
+    margin: 2vw;
+    display: block;
+}
+
+.movie-full-info {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin: 10px;
+    img {
+        margin: 10px;
+    }
+    
+}
+
+.info-block {
+    margin-top: 20px;
+    h2 {
+        margin-bottom: 10px;
+    }
+    p {
+        font-size: 18px;
+        line-height: 30px;
+    }
+}    
+
+#movie-favorite {
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    img {
+        width: 20vw;
+    }
+}
+
+.visible {
+    opacity: 0 !important;
+    transition: all .5s;
+    // display: none;
+    visibility: hidden !important;
+}
+
+.login-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container {
+    width: 50vw;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    padding: 20px 10px;
+}
+
+h3 {
+    font-size: 20px;
+}
+
+.login-input-block {
+    width: 42vw;
+}
+
+.login-input-block, .login-button-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sign-up-block {
+    position: absolute;
+    top: 0;
+    left: 0;
+    visibility: visible;
+    transition: all .5s;
+    opacity: 1;
+
+}
+
+// .sign-up-block-wrap {
+
+// }
+.recomedede-list {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.favorite-item {
+    width: 20vw;
+    margin: 10px;
+    img {
+        width: 20vw;
+    }
+}
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

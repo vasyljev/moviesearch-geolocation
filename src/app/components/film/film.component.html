@@ -1,0 +1,16 @@
+<p>
+ Search Movie
+</p>
+
+<input [formControl]="filmSearchControl">
+
+<a routerLink="favoritas"><button>Favorites</button></a>
+<!-- <button (click)="clear()">Claer Local Storage</button> -->
+
+<app-film-description [inputValue]="tmpValue" *ngIf="visabilityFilmDescription" [movies]="searchResult"></app-film-description>
+<div *ngIf="searchError">
+  {{searchError}}
+</div>
+
+
+

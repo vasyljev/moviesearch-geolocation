@@ -1,0 +1,16 @@
+button {
+    width: 100px;
+    height: 30px;
+    background-color: darkcyan;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    margin: 10px 20px;
+    transition: box-shadow .3s; 
+    outline: none;
+}
+
+button:hover, input:hover {
+    box-shadow: 0 0 10px blue;
+    transition: box-shadow .3s;
+}
