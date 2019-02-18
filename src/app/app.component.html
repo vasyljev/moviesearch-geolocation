@@ -2,10 +2,11 @@
         <h1>Hello {{ user.displayName }}!</h1>
         <button (click)="logout()">Logout</button>
     <button routerLink="/film">Film</button>
+    <button routerLink="/map">Map</button>
     <router-outlet></router-outlet>
 </section>
 <ng-template #showLogin>
-    <section class="login-wrap">
+    <section class="login-wrap" [ngClass]="{visible: !visValue}">
         <div class="container login-container">
             <h3>Please login</h3>
             <div class="login-input-block">

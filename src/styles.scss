@@ -142,9 +142,24 @@ h3 {
 
 }
 
-// .sign-up-block-wrap {
+.sign-up-block-wrap {
+    width: 100vw;
+}
 
-// }
+.sign-up-container {
+    width: 70vw;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    padding: 20px 10px;
+}
+
+.sign-up-input-block {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .recomedede-list {
     display: flex;
     justify-content: flex-start;
@@ -160,6 +175,9 @@ h3 {
     }
 }
 
+agm-map {
+    height: 300px;
+  }
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

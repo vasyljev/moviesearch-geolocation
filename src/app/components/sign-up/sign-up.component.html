@@ -1,9 +1,11 @@
 <section class="sign-up-block-wrap login-wrap">
-  <h3>Please enter your data to sign up</h3>
-  <div class="login-input-block">
-    <input type="email" #login placeholder="Email">
-    <input type="password" #password placeholder="Password">
-    <input type="text" #name placeholder="Name">
+  <div class="container sign-up-container ">
+    <h3>Please enter your data to sign up</h3>
+    <div class="sign-up-input-block">
+      <input type="email" #login placeholder="Email">
+      <input type="password" #password placeholder="Password">
+      <input type="text" #name placeholder="Name">
+    </div>
+    <button (click)="signUp(login.value, password.value, name.value)">Sign up!</button>
   </div>
-  <button (click)="signUp(login.value, password.value, name.value)">Sign up!</button>
 </section>
