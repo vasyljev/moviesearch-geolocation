@@ -24,11 +24,13 @@ export class FilmFullInfoComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.movie = this.LS.takeMovieFromLS();
     this.getMovieInfo(this.movie.Title);
     console.log(this.movieInfo);
     this.setFavoriteStatus(this.movie.Title);
   }
+
 
   getMovieInfo(title: string) {
     let movieTitle: string;
@@ -39,7 +41,6 @@ export class FilmFullInfoComponent implements OnInit {
     }       
     this.http.getMovie(movieTitle).subscribe((resp: Movie) => {
       this.movieInfo = resp;
-      console.log(this.movieInfo);
     });
   }
 
@@ -69,6 +70,11 @@ export class FilmFullInfoComponent implements OnInit {
     } else {
       this.favorite = false;
     }
+  }
+
+  setMovieDescription(movie: any) {
+    this.movie = movie;
+    this.movieInfo = movie;
   }
 
 }

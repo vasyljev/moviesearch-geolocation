@@ -1,0 +1,18 @@
+<section class="index-search-block">
+  <h3 class="movie-header">Find city by Index</h3>
+  <div class="flex-start-center">
+    <mat-form-field class="movie-search-field">
+      <input matInput type="text" [(formControl)]="indexControl" placeholder="Index" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of indexList" [value]="option" (click)="getCoordinates(option)"> 
+          {{ option }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  
+    <div class="palce-description" *ngIf="placeInfo">
+      {{placeInfo}}
+    </div>
+  </div>
+  
+</section>

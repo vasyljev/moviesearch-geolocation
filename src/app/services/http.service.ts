@@ -17,10 +17,7 @@ export class HttpService {
 
   getMovieByYear(year: number, title: string) {
     let titleName: string[] = [];
-    console.log('year', year);
-    console.log('title', title);
     let tmpTitle = title.split(' ');
-    console.log('tmpTitle', tmpTitle[0]);
     if(tmpTitle[0].length < 4 ) {
       titleName.push(tmpTitle[0], tmpTitle[1]);
     } else {
@@ -28,6 +25,15 @@ export class HttpService {
     }
     let strTitle = titleName.join(' ');
     return this.http.get(`http://www.omdbapi.com/?apikey=1643f72&s=${strTitle}`)
+  }
+
+
+  autocompleteIndex(index: string) {
+    return this.http.get(`https://api.postcodes.io/postcodes/${index}/autocomplete`);
+  }
+
+  getIndexInfo(index: string) {
+    return this.http.get(`https://api.postcodes.io/postcodes/${index}`);
   }
 
 }

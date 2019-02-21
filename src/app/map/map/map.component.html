@@ -1,5 +1,15 @@
-<p>
-  map works!
-</p>
-<agm-map [latitude]="lat" [longitude]="lng">
+<section class="map-section">
+  <div id="location-search-block" class="flex-start-center">
+    <div class="location-name-search">
+      <h2 class="movie-header">Geolocation service</h2>
+      <h3 class="movie-header">Tap to find place</h3>
+      <mat-form-field class="movie-search-field">
+        <input matInput type="text" [formControl]="geoSearchControl" placeholder="Location name" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search>
+      </mat-form-field>  
+    </div>
+    <app-index-search (setCoordinates)="setCoordinates($event)"></app-index-search>
+  </div>
+</section>
+<agm-map [latitude]="lat" [longitude]="lng" [scrollwheel]="false" [zoom]="zoom">
   <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+</agm-map>

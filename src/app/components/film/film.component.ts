@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { map, debounceTime, switchMap } from 'rxjs/operators';
+import { map, debounceTime, tap, switchMap, flatMap, filter } from 'rxjs/operators';
 
 import { HttpService } from '../../services/http.service';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { Movie } from '../../models/movie';
 import { from, Observable } from 'rxjs';
-import { flatMap } from 'rxjs/operators';
+
 
 
 @Component({
@@ -14,12 +14,13 @@ import { flatMap } from 'rxjs/operators';
   templateUrl: './film.component.html',
   styleUrls: ['./film.component.scss']
 })
-export class FilmComponent implements OnInit {
+export class FilmComponent implements OnInit, OnDestroy {
 
   filmSearchControl: FormControl;
   searchResult: Movie[] = [];
   searchError: string;
   visabilityFilmDescription: boolean = false;
+  subscribtion: any;
   
 
   constructor(private http: HttpService,
@@ -27,7 +28,7 @@ export class FilmComponent implements OnInit {
 
   ngOnInit() {   
     this.filmSearchControl = new FormControl();    
-    this.filmSearchControl.valueChanges.pipe(      
+    this.subscribtion = this.filmSearchControl.valueChanges.pipe(      
       debounceTime(700),      
       map(item => {        
         if(item.search(' ') != -1) {
@@ -42,78 +43,31 @@ export class FilmComponent implements OnInit {
         console.log('title', value);
         this.searchResult = [];
         return this.http.getMoviesList(value);
-      }))
-      .subscribe(resp => {
-              if(resp['Error']) {
-                console.log('Error 111');
-                this.visabilityFilmDescription = false;
-                this.searchError = resp['Error'];
-              } else {
-              return from(resp['Search']).pipe(
-                flatMap((value: any)  => {          
-                      return this.http.getMovie(value.Title);                  
-                })
-              ).subscribe((val: Movie) => {                          
-                if(val['Error']) {
-                  this.visabilityFilmDescription = false;
-                  this.searchError = val['Error'];
-                } else {
-                  this.searchResult.push(val);  
-                  this.visabilityFilmDescription = true;
-                  this.searchError = '';
-                }              
-              });
-              
-              }
-        },      
-                (err) => console.log('Error !!!!', err),
-                () => console.log('Complite'));
-
-      }
- 
-      // .subscribe((val: Movie) => {
-      //         if(val['Error']) {
-      //           this.visabilityFilmDescription = false;
-      //           this.searchError = val['Error'];
-      //         } else {
-      //           this.searchResult =  val['Search'];
-      //           this.visabilityFilmDescription = true;
-      //           this.searchError = '';
-      //         }              
-      //       },
-      //                 (err) => console.log('Error', err),
-      //                 () => console.log('Complite')
-      //       );
-            
+      }),
+      filter(resp => !resp['Error']),      
+      switchMap((resp) => {
+        return from(resp['Search']);
+      }),
+      flatMap((movie: Movie) => {
+        return this.http.getMovie(movie.Title)
+      })    
+    ).subscribe(   
+      (val: Movie) => {
+      this.searchResult.push(val);  
+      this.visabilityFilmDescription = true;
+      this.searchError = '';
+      },
+      (err) => console.log(err),
+      () => console.log('Complite')
+    );
+  }
     
-      
-  //     .subscribe(resp => {
-  //       return from(resp['Search']).pipe(
-  //       map((value: any)  => {          
-  //        return this.http.getMovie(value.Title);                  
-  //       })
-  //     ).subscribe(resp => {
-  //       resp.subscribe((val: Movie) => {
-  //       if(val['Error']) {
-  //         this.visabilityFilmDescription = false;
-  //         this.searchError = val['Error'];
-  //       } else {
-  //         this.searchResult.push(val);
-  //         this.visabilityFilmDescription = true;
-  //         this.searchError = '';
-  //       }
-        
-  //     },
-  //                 (err) => console.log('Error', err),
-  //                 () => console.log('Complite')
-  //     );
-        
-  //     });
-  // });
-  
-
   clear() {
     this.LS.claer();
+  }
+
+  ngOnDestroy() {
+    this.subscribtion.unsubscribe();
   }
   
 }

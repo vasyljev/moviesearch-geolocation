@@ -2,9 +2,9 @@
   <div class="container sign-up-container ">
     <h3>Please enter your data to sign up</h3>
     <div class="sign-up-input-block">
-      <input type="email" #login placeholder="Email">
-      <input type="password" #password placeholder="Password">
-      <input type="text" #name placeholder="Name">
+      <input type="email" #login placeholder="Email" class="login-input" required>
+      <input type="password" #password placeholder="Password" class="login-input" required>
+      <input type="text" #name placeholder="Name" class="login-input" required>
     </div>
     <button (click)="signUp(login.value, password.value, name.value)">Sign up!</button>
   </div>

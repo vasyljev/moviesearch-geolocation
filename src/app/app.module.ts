@@ -19,6 +19,7 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 
 import { MatGridListModule, MatCardModule, MatMenuModule, MatIconModule, MatButtonModule, MatToolbarModule, MatSidenavModule, MatListModule } from '@angular/material';
 import { LayoutModule } from '@angular/cdk/layout';
+import { IndexSearchComponent } from './map/index-search/index-search.component';
 
 
 
@@ -37,9 +38,7 @@ const config = {
   declarations: [
     AppComponent,
     FavoritesComponent,
-    SignUpComponent,
-    
-    
+    SignUpComponent
   ],
   imports: [
     BrowserModule,

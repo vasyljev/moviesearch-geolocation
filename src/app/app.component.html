@@ -1,8 +1,14 @@
-<section class="main" *ngIf="afAuth.user | async as user; else showLogin">  
-        <h1>Hello {{ user.displayName }}!</h1>
-        <button (click)="logout()">Logout</button>
-    <button routerLink="/film">Film</button>
-    <button routerLink="/map">Map</button>
+<section class="main" *ngIf="afAuth.user | async as user; else showLogin">
+    <mat-toolbar>  
+        <div class="name-block">
+            <h1>Hello {{ user.displayName }}!</h1>
+            <button (click)="logout()">Logout</button>
+        </div>
+    </mat-toolbar>
+    <mat-toolbar color="primary">
+        <button routerLink="/film">Film</button>
+        <button routerLink="/map">Map</button>
+    </mat-toolbar>
     <router-outlet></router-outlet>
 </section>
 <ng-template #showLogin>
@@ -10,8 +16,8 @@
         <div class="container login-container">
             <h3>Please login</h3>
             <div class="login-input-block">
-                <input type="email" #login placeholder="Email">
-                <input type="password" #password placeholder="Password">
+                <input type="email" #login placeholder="Email" class="login-input" required>
+                <input type="password" #password placeholder="Password" class="login-input" required>
             </div>
             <div class="login-button-block">
                 <button (click)="loginG()">Login with Google</button>

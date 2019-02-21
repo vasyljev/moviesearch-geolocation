@@ -12,5 +12,5 @@
   </div>
   
 </section>
-<app-recommended [year]="movieInfo?.Year" [title]="movieInfo?.Title" [genre]="movieInfo?.Genre"></app-recommended>
+<app-recommended (setMovieDescription)="setMovieDescription($event)" [year]="movieInfo?.Year" [title]="movieInfo?.Title" [genre]="movieInfo?.Genre"></app-recommended>
 <button (click)="goToMovieSearch()">Back</button>

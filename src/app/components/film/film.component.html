@@ -1,16 +1,17 @@
-<p>
- Search Movie
-</p>
+<section class="movie-wrap">
+  <div class="container">
+    <h2 class="movie-header">Find movie for today!</h2>
+    <a routerLink="favoritas" class="favorite-button"><button>Favorites</button></a>
+  </div>
+  <mat-form-field class="movie-search-field">
+    <input matInput [formControl]="filmSearchControl" placeholder="Movie title" >
+  </mat-form-field>
 
-<input [formControl]="filmSearchControl">
+  
+  <!-- <button (click)="clear()">Claer Local Storage</button> -->
 
-<a routerLink="favoritas"><button>Favorites</button></a>
-<!-- <button (click)="clear()">Claer Local Storage</button> -->
-
-<app-film-description [inputValue]="tmpValue" *ngIf="visabilityFilmDescription" [movies]="searchResult"></app-film-description>
-<div *ngIf="searchError">
-  {{searchError}}
-</div>
-
-
-
+  <app-film-description [inputValue]="tmpValue" *ngIf="visabilityFilmDescription" [movies]="searchResult"></app-film-description>
+  <div *ngIf="searchError">
+    {{searchError}}
+  </div>
+</section>

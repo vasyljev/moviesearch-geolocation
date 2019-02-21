@@ -15,8 +15,7 @@ export class LoginService {
     setUserState() {
       this.afAuth.auth.onAuthStateChanged(function(user) {
         if (user) {
-          
-          console.log('ueser', this.actualUser)
+        
           // User is signed in.
           // var displayName = user.displayName;
           // var email = user.email;
@@ -52,7 +51,6 @@ export class LoginService {
   
     signUp(email: string, password: string, name: string) {
       this.afAuth.auth.createUserWithEmailAndPassword(email, password).catch(function(error) {
-        // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
         console.log(errorCode, errorMessage);
@@ -66,6 +64,7 @@ export class LoginService {
             // Update successful.
           }).catch(function(error) {
             // An error happened.
+            console.log('error', error);
           });
           // this.db.list('items').push({ emailV: email,
           //   favorites: []  
