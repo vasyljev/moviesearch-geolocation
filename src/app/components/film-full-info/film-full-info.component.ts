@@ -4,7 +4,7 @@ import { Location } from '@angular/common';
 
 import { LocalStorageService } from '../../services/local-storage.service';
 import { HttpService } from '../../services/http.service';
-// import { map } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-film-full-info',
@@ -24,10 +24,8 @@ export class FilmFullInfoComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.movie = this.LS.takeMovieFromLS();
     this.getMovieInfo(this.movie.Title);
-    console.log(this.movieInfo);
     this.setFavoriteStatus(this.movie.Title);
   }
 
@@ -51,12 +49,9 @@ export class FilmFullInfoComponent implements OnInit {
   addOrRemoveFavorite(title: string) {
     let favoriteList = this.LS.takeFromFavorites();
     if(favoriteList.find(item => item.Title == title)) {
-      console.log('remove 1');
       this.LS.removeFromFavorites(title);
     } else {
       this.LS.putInFavorites(this.movie);
-      // let _button = event.target as HTMLButtonElement;
-      // _button.style.opacity = '0';
     }
     this.setFavoriteStatus(title);
   }
@@ -65,7 +60,7 @@ export class FilmFullInfoComponent implements OnInit {
       localStorage.setItem('favorites', JSON.stringify([]));
     } 
     let favoriteList = this.LS.takeFromFavorites();
-    if(favoriteList.find(item => item.Title == title)) {
+    if(favoriteList.find((item: Movie) => item.Title == title)) {
       this.favorite = true;
     } else {
       this.favorite = false;

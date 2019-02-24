@@ -38,7 +38,7 @@ export class FilmDescriptionComponent implements OnInit {
       localStorage.setItem('favorites', JSON.stringify([]));
     } 
     let favoriteList = this.LS.takeFromFavorites();
-    if(favoriteList.find(item => item.Title == title)) {
+    if(favoriteList.find((item: Movie) => item.Title == title)) {
       return true;
     } else {
       return false;

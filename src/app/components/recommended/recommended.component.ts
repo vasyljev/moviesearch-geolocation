@@ -3,8 +3,8 @@ import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angu
 import { HttpService } from '../../services/http.service';
 import { LocalStorageService }  from '../../services/local-storage.service';
 import { Movie } from '../../models/movie';
-import { of, from } from 'rxjs';
-import { map, flatMap,filter } from 'rxjs/operators';
+import { from } from 'rxjs';
+import { flatMap, filter, switchMap } from 'rxjs/operators';
 
 
 @Component({
@@ -14,8 +14,6 @@ import { map, flatMap,filter } from 'rxjs/operators';
 })
 export class RecommendedComponent implements OnInit, OnDestroy {
 
-  recomendedList: any[];
-
   @Input() year: number;
   @Input() title: string;
   @Input() genre: string;
@@ -24,13 +22,13 @@ export class RecommendedComponent implements OnInit, OnDestroy {
   
   subscriber: any;
   movieValue: Movie;
-
+  recomendedList: any[];
+  
   constructor(private http: HttpService,
     private LS: LocalStorageService) { }
 
   ngOnInit() {
-    setTimeout(()=>  this.getRecomendedList(this.year, this.title, this.genre), 700);
-    
+    setTimeout(()=>  this.getRecomendedList(this.title, this.genre), 700);    
   }
 
   ngOnDestroy() {
@@ -38,14 +36,15 @@ export class RecommendedComponent implements OnInit, OnDestroy {
   }
 
 
-  getRecomendedList(year: number, title: string, genre: string) {
+  getRecomendedList(title: string, genre: string) {
     this.recomendedList = [];
     let tmpArrGenre = genre.split(', ');
-    this.subscriber = this.http.getMovieByYear(year, title).subscribe(resp => from(resp['Search']).pipe(
-      flatMap(item => { 
-        return this.http.getMovie(item['Title'])}),
-        filter(item => item['Title'] !== title),
-        filter(item => {
+    this.subscriber = this.http.getMovieByYear(title)
+    .pipe(
+      switchMap(({Search}) => from(Search)),
+      flatMap(({Title}) => this.http.getMovie(Title)),
+      filter(item => item['Title'] !== title),
+      filter(item => {
           let tmpItemArr = item['Genre'].split(', ');
           for(let i of tmpArrGenre) {
             if(tmpItemArr.indexOf(i) != -1) {
@@ -53,22 +52,16 @@ export class RecommendedComponent implements OnInit, OnDestroy {
             } else {
               continue;
             }             
-          }
-          
-        })
-      )
-      .subscribe(resp => {
-        this.recomendedList.push(resp);
+          }          
       })
-     )   
+    )
+    .subscribe(resp => {
+      this.recomendedList.push(resp);
+    })     
   }
 
   setMovie(movie: any) {
     this.setMovieDescription.emit(movie);
-    // this.LS.putMoveInLS(movie);
-    // console.log('input', this.movieValue);
-    // this.movieValue = movie;
-    // localStorage.setItem('inputValue', JSON.stringify(movie));
   }
 
   toFavorit(title: string) {
@@ -82,7 +75,7 @@ export class RecommendedComponent implements OnInit, OnDestroy {
       localStorage.setItem('favorites', JSON.stringify([]));
     } 
     let favoriteList = this.LS.takeFromFavorites();
-    return favoriteList.find(item => item.Title == title);
+    return favoriteList.find((item: Movie) => item.Title == title);
   }
   
 
@@ -94,6 +87,4 @@ export class RecommendedComponent implements OnInit, OnDestroy {
       this.toFavorit(title);
     }
   }
-
-
 }

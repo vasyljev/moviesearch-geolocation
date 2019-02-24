@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 import { LocalStorageService } from '../../services/local-storage.service';
-import { HttpService } from '../../services/http.service';
 import { Movie } from 'src/app/models/movie';
 
 @Component({
@@ -13,8 +12,7 @@ export class FavoritesComponent implements OnInit {
 
   list: Movie[];
 
-  constructor(private LS: LocalStorageService,
-    private http: HttpService) { }
+  constructor(private LS: LocalStorageService) { }
 
   ngOnInit() {
     this.getFavoriteList();
@@ -36,6 +34,4 @@ export class FavoritesComponent implements OnInit {
    this.list = tmpList;
     localStorage.setItem('favorites', JSON.stringify(tmpList));
   }
-  
-
 }

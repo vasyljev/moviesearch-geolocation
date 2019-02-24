@@ -15,28 +15,15 @@ export class LoginService {
     setUserState() {
       this.afAuth.auth.onAuthStateChanged(function(user) {
         if (user) {
-        
-          // User is signed in.
-          // var displayName = user.displayName;
-          // var email = user.email;
-          // var emailVerified = user.emailVerified;
-          // var photoURL = user.photoURL;
-          // var isAnonymous = user.isAnonymous;
-          // var uid = user.uid;
-          // var providerData = user.providerData;
-          // ...
-
           return user;
         } else {
-          // User is signed out.
-          // ...
+          
         }
       });
     }
   
     loginGoogle() {
-      this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
-      
+      this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());      
     }
   
     loginEmailPassword (email: string, password: string) {
@@ -66,21 +53,11 @@ export class LoginService {
             // An error happened.
             console.log('error', error);
           });
-          // this.db.list('items').push({ emailV: email,
-          //   favorites: []  
-          // });
         });  
     }
-        
-    
-  
-  
+     
     logout() {
       localStorage.clear();
       this.afAuth.auth.signOut();
     }
-
-
-
-
 }

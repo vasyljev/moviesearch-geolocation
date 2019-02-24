@@ -20,14 +20,14 @@ export class LocalStorageService {
     if(!JSON.parse(localStorage.getItem('favorites'))) {
       localStorage.setItem('favorites', JSON.stringify([]));
     } 
-      let list = JSON.parse(localStorage.getItem('favorites'));
-      for(let item of list) {
-        if(item.Title == movie.Title) {          
-          return;
-        }
+    let list = JSON.parse(localStorage.getItem('favorites'));
+    for(let item of list) {
+      if(item.Title == movie.Title) {          
+        return;
       }
-      list.push(movie);
-      localStorage.setItem('favorites', JSON.stringify(list));
+    }
+    list.push(movie);
+    localStorage.setItem('favorites', JSON.stringify(list));
   }
 
   takeFromFavorites() {

@@ -5,7 +5,7 @@ import { map, debounceTime, tap, switchMap, flatMap, filter } from 'rxjs/operato
 import { HttpService } from '../../services/http.service';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { Movie } from '../../models/movie';
-import { from, Observable } from 'rxjs';
+import { from } from 'rxjs';
 
 
 
@@ -40,13 +40,12 @@ export class FilmComponent implements OnInit, OnDestroy {
         }        
       }),
       switchMap(value => {
-        console.log('title', value);
         this.searchResult = [];
         return this.http.getMoviesList(value);
       }),
       filter(resp => !resp['Error']),      
-      switchMap((resp) => {
-        return from(resp['Search']);
+      switchMap(({Search}) => {
+        return from(Search);
       }),
       flatMap((movie: Movie) => {
         return this.http.getMovie(movie.Title)

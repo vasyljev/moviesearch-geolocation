@@ -38,13 +38,10 @@ export class MapComponent implements OnInit {
       });
       autocomplete.addListener("place_changed", () => {
         this.ngZone.run(() => {
-          //get the place result
           let place: google.maps.places.PlaceResult = autocomplete.getPlace();
-          //verify result
           if (place.geometry === undefined || place.geometry === null) {
             return;
           }          
-          //set latitude, longitude and zoom
           this.lat = place.geometry.location.lat();
           this.lng = place.geometry.location.lng();
           this.zoom = 12;

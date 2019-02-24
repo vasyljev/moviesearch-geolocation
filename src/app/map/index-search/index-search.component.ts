@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { map, switchMap, debounceTime, mergeMap, filter } from 'rxjs/operators';
+import { map, switchMap, debounceTime, filter } from 'rxjs/operators';
 
 import { HttpService } from '../../services/http.service';
 
@@ -30,10 +30,10 @@ export class IndexSearchComponent implements OnInit, OnDestroy {
     this.indexControl.valueChanges.pipe(
       debounceTime(500),
       filter(index => index != ''),
-      mergeMap(index => this.http.autocompleteIndex(index))
-    ).subscribe(resp => {
+      switchMap(index => this.http.autocompleteIndex(index))
+    ).subscribe(({result}) => {
       this.infoBloclVs = false;
-      this.indexList = resp['result'];
+      this.indexList = result;
     },
       (err) => console.log(err),
       () => console.log('Complite')
@@ -41,26 +41,21 @@ export class IndexSearchComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if(this.subsc) this.subsc.unsubscribe();
-    
+    if(this.subsc) this.subsc.unsubscribe();    
   }
 
   getCoordinates(index: string) {
     let coord: string[] = [];
     this.subsc = this.http.getIndexInfo(index).pipe(
-      map(index => index['result'])
+      map(({result}) => result)
     )
-    .subscribe(resp => {
-        coord.push(resp['latitude']);
-        coord.push(resp['longitude']);
+    .subscribe(({latitude, longitude, admin_district}) => {
+        coord.push(latitude);
+        coord.push(longitude);
         this.indexList = [];
         this.infoBloclVs = true;
-        console.log(resp);
-        this.placeInfo = resp['admin_district'];
+        this.placeInfo = admin_district;
         this.setCoordinates.emit(coord);
     })
   }
-
-
-
 }
