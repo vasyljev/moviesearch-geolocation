@@ -9,10 +9,10 @@ export class HttpService {
   constructor(private http: HttpClient) { }
 
   getMoviesList(name: string)  {
-    return this.http.get<{Search:any}>(`http://www.omdbapi.com/?apikey=1643f72&s=${name}`)
+    return this.http.get<{Search:any}>(`https://www.omdbapi.com/?apikey=1643f72&s=${name}`)
   }
   getMovie(name: string) {
-    return this.http.get<{Title: any}>(`http://www.omdbapi.com/?apikey=1643f72&t=${name}`)
+    return this.http.get<{Title: any}>(`https://www.omdbapi.com/?apikey=1643f72&t=${name}`)
   }
 
   getMovieByYear(title: string) {
@@ -24,7 +24,7 @@ export class HttpService {
       titleName.push(tmpTitle[0]);
     }
     let strTitle = titleName.join(' ');
-    return this.http.get<{Search: any}>(`http://www.omdbapi.com/?apikey=1643f72&s=${strTitle}`)
+    return this.http.get<{Search: any}>(`https://www.omdbapi.com/?apikey=1643f72&s=${strTitle}`)
   }
 
 

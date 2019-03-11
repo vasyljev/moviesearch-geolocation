@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   actualUser: any;
 
   constructor(private login: LoginService,
-    private afAuth: AngularFireAuth) {
+    public afAuth: AngularFireAuth) {
   }
 
   ngOnInit() {

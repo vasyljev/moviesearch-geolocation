@@ -5,5 +5,6 @@ export interface Movie {
     Year: string;
     Actors: string;
     Genre: string;
+    Poster: string;
     
 }
