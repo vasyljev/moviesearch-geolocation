@@ -40,4 +40,8 @@ export class AppComponent implements OnInit {
   toogleVis() {
     return this.visValue = !this.visValue;
   }
+
+  setVisValue() {
+    return this.visValue = true;
+  }
 }

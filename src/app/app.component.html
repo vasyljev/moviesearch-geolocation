@@ -26,5 +26,5 @@
             <button (click)="toogleVis()">Sign up!</button>
         </div>
     </section>
-    <app-sign-up [ngClass]="{visible: visValue, 'sign-up-block': true}"></app-sign-up>
+    <app-sign-up [ngClass]="{visible: visValue, 'sign-up-block': true}" (setVisValue)="setVisValue()"></app-sign-up>
 </ng-template>
