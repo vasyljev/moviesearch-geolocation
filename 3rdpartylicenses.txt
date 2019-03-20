@@ -664,8 +664,6 @@ MIT
 
 firebase/database
 
-@angular/material/toolbar
-
 zone.js
 MIT
 The MIT License
