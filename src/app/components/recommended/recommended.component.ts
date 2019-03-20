@@ -25,14 +25,16 @@ export class RecommendedComponent implements OnInit, OnDestroy {
   recomendedList: any[];
   
   constructor(private http: HttpService,
-    private LS: LocalStorageService) { }
+    private LS: LocalStorageService) {}
 
-  ngOnInit() {
-    setTimeout(()=>  this.getRecomendedList(this.title, this.genre), 700);    
+  ngOnInit() {}
+
+  ngOnChanges() {
+    this.title && this.genre ?  setTimeout(()=>  this.getRecomendedList(this.title, this.genre), 500) : console.log('Wait!');    
   }
 
   ngOnDestroy() {
-    this.subscriber.unsubscribe();
+    this.subscriber ? this.subscriber.unsubscribe() : '';
   }
 
 

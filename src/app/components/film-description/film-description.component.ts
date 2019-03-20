@@ -23,8 +23,8 @@ export class FilmDescriptionComponent implements OnInit {
 
   setMovie(movie: Object) {
     this.LS.putMoveInLS(movie);
-    console.log('input', this.inputValue);
     localStorage.setItem('inputValue', this.inputValue);
+    console.log('film-desc', movie, this.inputValue);
   }
 
   toFavorit(title: string) {

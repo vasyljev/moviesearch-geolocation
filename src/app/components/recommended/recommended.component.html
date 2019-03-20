@@ -5,8 +5,6 @@
   <div class="recomedede-list">
     <div *ngFor="let movie of recomendedList"  class="favorite-item">
       <div [ngClass]="{'favoties-button': true, 'fav': setFavValue(movie.Title), 'not-fav': !setFavValue(movie.Title)}" (click)="addOrRemoveFavorite(movie.Title)"></div>
-      <!-- <button class="favoties-button" (click)="toFavorit(movie.Title)">To favorites</button> -->
-      <!-- <button class="favoties-button" (click)="addOrRemoveFavorite(movie.Title)">{{setFavValue(movie.Title) ? 'Remove from favorite' : 'To favorite'}}</button> -->
       <a [routerLink]="'/film/full/' + movie.Title" (click)="setMovie(movie)">
         <img [src]="movie.Poster == 'N/A' ? 'https://cdn.browshot.com/static/images/not-found.png' : movie.Poster" alt="Poster">
         <h3>{{movie.Title}}</h3>

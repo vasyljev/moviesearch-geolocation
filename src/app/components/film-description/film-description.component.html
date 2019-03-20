@@ -1,9 +1,6 @@
 <section id="movie-search-result">
   <div *ngFor="let movie of movies" class="movie-mini-description" >
-    <!-- <button class="favoties-button" (click)="toFavorit(movie.Title)">To favorites</button> -->
     <div [ngClass]="{'favoties-button': true, 'fav': setFavValue(movie.Title), 'not-fav': !setFavValue(movie.Title)}" (click)="addOrRemoveFavorite(movie.Title)"></div>
-    <!-- <img class="favoties-button" [src]="setFavValue(movie.Title) ? '../../img/star.png' : '../../img/star-gold.png'" alt="" (click)="addOrRemoveFavorite(movie.Title)"> -->
-    <!-- <button class="favoties-button" (click)="addOrRemoveFavorite(movie.Title)">{{setFavValue(movie.Title) ? 'Remove from favorite' : 'To favorite'}}</button> -->
     <a [routerLink]="'full/' + movie.Title" (click)="setMovie(movie)">
       <img [src]="movie.Poster == 'N/A' ? 'https://cdn.browshot.com/static/images/not-found.png' : movie.Poster" alt="Poster">
       <h3>{{movie.Title}}</h3>

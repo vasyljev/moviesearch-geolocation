@@ -26,6 +26,7 @@ export class FilmFullInfoComponent implements OnInit {
   ngOnInit() {
     this.movie = this.LS.takeMovieFromLS();
     this.getMovieInfo(this.movie.Title);
+    console.log('Film-full on init', this.movie);
     this.setFavoriteStatus(this.movie.Title);
   }
 
@@ -36,7 +37,10 @@ export class FilmFullInfoComponent implements OnInit {
       let tmpItemArr = title.split(' ');
       let tmpItemString = tmpItemArr.join('+');
       movieTitle = tmpItemString;
-    }       
+    }   else {
+      movieTitle = title;
+    }   
+    console.log('getMovieInfo movieTitle', movieTitle); 
     this.http.getMovie(movieTitle).subscribe((resp: Movie) => {
       this.movieInfo = resp;
     });
@@ -70,6 +74,8 @@ export class FilmFullInfoComponent implements OnInit {
   setMovieDescription(movie: any) {
     this.movie = movie;
     this.movieInfo = movie;
+    this.setFavoriteStatus(this.movie.Title);
+
   }
 
 }
