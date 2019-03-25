@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { LoginService } from '../../services/login.service';
+import { LoginService } from "../../services/LoginService";
 
 @Component({
   selector: 'app-sign-up',

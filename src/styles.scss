@@ -219,6 +219,9 @@ img {
 
 .sign-up-block-wrap {
     width: 100vw;
+    .login-button-block {
+        flex-direction: row;
+    }
 }
 
 .sign-up-container {

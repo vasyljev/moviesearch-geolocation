@@ -1,14 +1,14 @@
 <section class="sign-up-block-wrap login-wrap">
   <div class="container sign-up-container">
     <h3 class="login-header">Please enter your data to sign up</h3>
-    <div class="sign-up-input-block">
-      <input type="email" #login placeholder="Email" class="login-input" required >
-      <input type="password" #password placeholder="Password" class="login-input" required >
-      <input type="text" #name placeholder="Name" class="login-input" required >
-    </div>
+    <form class="sign-up-input-block" (submit)="signUp(login.value, password.value, name.value)">
+      <input required type="email" #login placeholder="Email" class="login-input"  >
+      <input required type="password" #password placeholder="Password" class="login-input"  >
+      <input required type="text" #name placeholder="Name" class="login-input"  >
+    </form>
     <div class="login-button-block">
       <button (click)="signUp(login.value, password.value, name.value)">Sign up!</button>
-      <button (click)="onSetVisValue()">Back</button>
+      <button (click)="onSetVisValue()">Back to login</button>
     </div>
   </div>
 </section>
